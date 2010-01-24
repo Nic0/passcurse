@@ -10,51 +10,53 @@
 #include <stdlib.h>
 #include <ncurses.h>
 
+#define ELEMENT
+
 /*  Main struct for each pass's entry   */
 struct Entry {
-    //char  name[];
-    int   group;
-    char *description;
-    char *address;
-    char *login;
-    char *pass;
-    char  name[];
+    char name[128];
+    char login[32];
+    char pass[32];
 };
 
 int main (void)
 {
-    /*int row = 0;
-    int col = 0;
-    int ch  = 0;
+    int nbrOfLine = 0;
+    char buffer[256];
+    
 
-    initscr();
-    getmaxyx(stdsrc, row, col);
-
-    cbreak();
-    curs_set(0);
-    keypad(strscr, TRUE);*/
-
-    /*  We take the name list from the passes file
+    /*  First, we go throught the file to know how many
+     *  structure name/login/pass we've got.
+     *  We count lines, and give "lines/ELEMENT" structures
      */
 
-    FILE *passfile;
-    passfile = NULL;
-    passfile = fopen ("/home/nicolas/pass.txt", "r");
+    FILE *passfile = NULL;
+    passfile = fopen("/home/nicolas/pass.txt", "r");
+
+    if (passfile != NULL)
+    {
+        while(1)
+        {
+            fscanf(passfile, "%s", buffer);
+            if (feof(passfile)) break;
+            nbrOfLine++;
+        }
+        fclose(passfile);
+    }
+    
+    /*  We take for each entry juste his name
+     *  It's put in the entry.name structure
+     */
+
+    passfile = fopen("/home/nicolas/pass.txt", "r");
 
     if(passfile != NULL)
     {
-        struct Entry entry[5];
+        int nbrOfEntry;
+        nbrOfEntry = nbrOfLine / ELEMENT;
+        struct Entry entry[nbrOfEntry];
         int n = 0;
-        /*for (n = 0;n <= 5; n++)
-        {
-            //entry[n].name = malloc (sizeof(entry[n].name)+100);
-            //entry[n].name = malloc (256);
-            //entry[n].name = malloc (strlen(entry[n].name)*sizeof(char *));
-            //entry[n].name = NULL;
-        }*/
 
-
-        n=0;
         while(1)
         {
             fscanf(passfile, "%s", entry[n].name);     
