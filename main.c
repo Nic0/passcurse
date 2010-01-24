@@ -18,13 +18,13 @@
 
 /*###################################################
  *   Main struct for each pass's entry
- */
+ *
 struct Entry {
     char name[128];
     char login[32];
     char pass[32];
 };
-/*##################################################*/
+*##################################################*/
 
 
 int main (void)
@@ -34,7 +34,7 @@ int main (void)
      *  We count lines, and give "lines/ELEMENT" structures
      */
     int nbrOfLine = 0;
-    int countLine (nbrOfLine);
+    countLine (nbrOfLine);
 
     int nbrOfEntry;
     nbrOfEntry = nbrOfLine / ELEMENT;
@@ -45,7 +45,16 @@ int main (void)
     
     struct Entry entry[nbrOfEntry];
 
-    FILE *passfile;
+    getNameEntry(&entry[0]);
+
+    /*  !!  Debug fonction  !!      */
+    int n;
+    for (n = 0;n <= nbrOfEntry; n++)
+    {
+        printf("entry: %s\n", entry[n].name);
+    }
+
+    /*FILE *passfile;
     passfile = fopen("/home/nicolas/pass.txt", "r");
 
     if(passfile != NULL)
@@ -67,7 +76,7 @@ int main (void)
             n++;
         }
         fclose (passfile);
-    }
+    }*/
     
     return EXIT_SUCCESS;
 }
