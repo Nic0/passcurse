@@ -32,20 +32,21 @@ int main (void)
      *  structure name/login/pass we've got.
      *  We count lines, and give "lines/ELEMENT" structures
      */
-    
     int nbrOfLine = 0;
     int countLine (nbrOfLine);
+
+    int nbrOfEntry;
+    nbrOfEntry = nbrOfLine / ELEMENT;
 
     /*  We take for each entry juste his name
      *  It's put in the entry.name structure
      */
+
     FILE *passfile;
     passfile = fopen("/home/nicolas/pass.txt", "r");
 
     if(passfile != NULL)
     {
-        int nbrOfEntry;
-        nbrOfEntry = nbrOfLine / ELEMENT;
         struct Entry entry[nbrOfEntry];
         int n = 0;
 
