@@ -12,6 +12,7 @@
 
 #include "file.h"
 
+/*  ELEMENT is the numbre of items in the Entry's structure */
 #define ELEMENT 3
 
 
@@ -41,20 +42,28 @@ int main (void)
     /*  We take for each entry juste his name
      *  It's put in the entry.name structure
      */
+    
+    struct Entry entry[nbrOfEntry];
 
     FILE *passfile;
     passfile = fopen("/home/nicolas/pass.txt", "r");
 
     if(passfile != NULL)
     {
-        struct Entry entry[nbrOfEntry];
         int n = 0;
+        int i = 0;
+        char buffer[256];
 
         while(1)
         {
-            fscanf(passfile, "%s", entry[n].name);     
-            if (feof(passfile)) break;
-            printf("entry: %s\n", entry[n].name);
+            fscanf(passfile, "%s", buffer); 
+            if(feof(passfile)) break;
+            if( n % ELEMENT == 0)
+            {
+                strcpy(entry[i].name, buffer);
+                printf("entry: %s\n", entry[i].name);
+                i++;
+            }
             n++;
         }
         fclose (passfile);
