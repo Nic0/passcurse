@@ -16,17 +16,6 @@
 #define ELEMENT 3
 
 
-/*###################################################
- *   Main struct for each pass's entry
- *
-struct Entry {
-    char name[128];
-    char login[32];
-    char pass[32];
-};
-*##################################################*/
-
-
 int main (void)
 {
     /*  First, we go throught the file to know how many
@@ -36,16 +25,19 @@ int main (void)
     int nbrOfLine = 0;
     countLine (nbrOfLine);
 
+    /*  Very simple calcul to get the number of entry
+     */
     int nbrOfEntry;
-    nbrOfEntry = nbrOfLine / ELEMENT;
+    /*nbrOfEntry = nbrOfLine / ELEMENT;*/
+    nbrOfEntry = 2; 
 
     /*  We take for each entry juste his name
      *  It's put in the entry.name structure
      */
-    
+
     struct Entry entry[nbrOfEntry];
 
-    getNameEntry(&entry[0]);
+    getNameEntry(&entry);
 
     /*  !!  Debug fonction  !!      */
     int n;
@@ -53,6 +45,8 @@ int main (void)
     {
         printf("entry: %s\n", entry[n].name);
     }
+    /*  !! END of Debug fonction !! */
+
 
     /*FILE *passfile;
     passfile = fopen("/home/nicolas/pass.txt", "r");

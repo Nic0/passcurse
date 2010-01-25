@@ -3,7 +3,7 @@
 #################################
 
 CC=gcc
-CFLAGS=-W -Wall -ansi -pedantic
+CFLAGS=-g -W -Wall -ansi -pedantic
 LDFLAGS=
 EXEC=passcurse
 SRC= $(wildcard *.c)
@@ -22,4 +22,4 @@ $(EXEC): $(OBJ)
 	$(CC) -o $@ -c $< $(CFLAGS)
 
 clean:
-	rm -rf *.o
+	rm -rf bin/*.o
