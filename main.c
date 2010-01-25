@@ -14,7 +14,7 @@
 
 /*  ELEMENT is the numbre of items in the Entry's structure */
 #define ELEMENT 3
-
+#define NB_ENTRY 10
 
 int main (void)
 {
@@ -29,15 +29,15 @@ int main (void)
      */
     int nbrOfEntry;
     /*nbrOfEntry = nbrOfLine / ELEMENT;*/
-    nbrOfEntry = 2; 
+    nbrOfEntry = 1; 
 
     /*  We take for each entry juste his name
      *  It's put in the entry.name structure
      */
 
-    struct Entry entry[nbrOfEntry];
+    struct Entry entry[NB_ENTRY];
 
-    getNameEntry(&entry);
+    getNameEntry(entry);
 
     /*  !!  Debug fonction  !!      */
     int n;

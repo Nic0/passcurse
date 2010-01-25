@@ -44,7 +44,7 @@ return nbrOfLine;
  *  It just list names
  */
 
-void getNameEntry (struct Entry (*addrEntry)[5])
+void getNameEntry (struct Entry addrEntry[])
 {
     char buffer[256] = {0};
     FILE *passfile = NULL;
@@ -62,7 +62,7 @@ void getNameEntry (struct Entry (*addrEntry)[5])
 
             if( n % ELEMENT == 0)
             {
-                strncpy(addrEntry[i] -> name, buffer, 120);
+                strncpy(addrEntry[i].name, buffer, 120);
                 i++;
             }
             n++;
