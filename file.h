@@ -13,7 +13,7 @@ struct Entry {
 /*  Fonction to count the number of line
  *  in the passfile, return of this number
  */
-int countLine (int nbrOfLine);
+int countLine (void);
 
 /*  Get the name from each entry, return it
  *  in the structure

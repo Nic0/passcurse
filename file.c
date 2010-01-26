@@ -18,9 +18,9 @@
  *  but has to be change to a proper line
  */
 
-int countLine(int nbrOfLine)
+int countLine(void)
 {
-    nbrOfLine = 0;
+    int nbrOfLine = 0;
     char buffer[256];
 
     FILE *passfile = NULL;

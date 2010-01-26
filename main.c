@@ -23,13 +23,13 @@ int main (void)
      *  We count lines, and give "lines/ELEMENT" structures
      */
     int nbrOfLine = 0;
-    /*  TODO debug this one     */
-    countLine (nbrOfLine);
+    nbrOfLine = countLine ();
 
     /*  Very simple calcul to get the number of entry
+     *  - 1 because the first entry is 0
      */
     int nbrOfEntry;
-    nbrOfEntry = nbrOfLine / ELEMENT;
+    nbrOfEntry = (nbrOfLine / ELEMENT) - 1;
 
     /*  We take for each entry juste his name
      *  It's put in the entry.name structure
@@ -42,7 +42,7 @@ int main (void)
     /*  !!  Debug fonction  !!      */
     int n;
     /*  TODO replace NB_ENTRY with nbrOfEntry   */
-    for (n = 0;n <= NB_ENTRY; n++)
+    for (n = 0;n <= nbrOfEntry; n++)
     {
         printf("entry: %s\n", entry[n].name);
     }
