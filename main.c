@@ -19,13 +19,22 @@
 
 int main (void)
 {
-    /*  We get the home directory and stock it  */
+    
+    /*  We get the home directory and stock it
+     *  return it like /home/user/.passcurse/
+     */
     char homedir[128] = {0};
     if( getHomeDir(homedir) == 1 )
     {
         return EXIT_FAILURE;
     }
-    printf("%s\n", homedir);
+    
+    char passfilePath[256] = {0};
+    if( getPassfilePath(homedir, passfilePath) == 1)
+    {
+        return EXIT_FAILURE;
+    }
+    printf("%s\n",passfilePath); 
     /*  First, we go throught the file to know how many
      *  structure name/login/pass we've got.
      *  We count lines, and give "lines/ELEMENT" structures
@@ -33,12 +42,14 @@ int main (void)
     int nbrOfLine = 0;
     nbrOfLine = countLine ();
 
+
     /*  Very simple calcul to get the number of entry
      *  - 1 because the first entry is 0
      */
     int nbrOfEntry;
     nbrOfEntry = (nbrOfLine / ELEMENT) - 1;
     
+
     /*  The nbrOfEntry can not be bigger than NB_ENTRY
      *  TODO find something if this happen
      */
@@ -48,13 +59,13 @@ int main (void)
         nbrOfEntry = NB_ENTRY;
     }
 
+
     /*  We take for each entry juste his name
      *  It's put in the entry.name structure
      */
-
     struct Entry entry[NB_ENTRY];
-
     getNameEntry(entry);
+
     /*  !!  Debug fonction  !!      */
     int n;
     for (n = 0;n <= nbrOfEntry; n++)
