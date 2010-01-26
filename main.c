@@ -11,13 +11,21 @@
 #include <ncurses.h>
 
 #include "file.h"
+#include "fonction.h"
 
 /*  ELEMENT is the numbre of items in the Entry's structure */
 #define ELEMENT 3
-#define NB_ENTRY 10
+#define NB_ENTRY 256
 
 int main (void)
 {
+    /*  We get the home directory and stock it  */
+    char homedir[128] = {0};
+    if( getHomeDir(homedir) == 1 )
+    {
+        return EXIT_FAILURE;
+    }
+    printf("%s\n", homedir);
     /*  First, we go throught the file to know how many
      *  structure name/login/pass we've got.
      *  We count lines, and give "lines/ELEMENT" structures
@@ -30,6 +38,15 @@ int main (void)
      */
     int nbrOfEntry;
     nbrOfEntry = (nbrOfLine / ELEMENT) - 1;
+    
+    /*  The nbrOfEntry can not be bigger than NB_ENTRY
+     *  TODO find something if this happen
+     */
+    if( nbrOfEntry > NB_ENTRY )
+    {
+        printf("An unexpected error has occured, too many password found in the passfile");
+        nbrOfEntry = NB_ENTRY;
+    }
 
     /*  We take for each entry juste his name
      *  It's put in the entry.name structure
@@ -38,40 +55,13 @@ int main (void)
     struct Entry entry[NB_ENTRY];
 
     getNameEntry(entry);
-
     /*  !!  Debug fonction  !!      */
     int n;
-    /*  TODO replace NB_ENTRY with nbrOfEntry   */
     for (n = 0;n <= nbrOfEntry; n++)
     {
         printf("entry: %s\n", entry[n].name);
     }
     /*  !! END of Debug fonction !! */
 
-
-    /*FILE *passfile;
-    passfile = fopen("/home/nicolas/pass.txt", "r");
-
-    if(passfile != NULL)
-    {
-        int n = 0;
-        int i = 0;
-        char buffer[256];
-
-        while(1)
-        {
-            fscanf(passfile, "%s", buffer); 
-            if(feof(passfile)) break;
-            if( n % ELEMENT == 0)
-            {
-                strcpy(entry[i].name, buffer);
-                printf("entry: %s\n", entry[i].name);
-                i++;
-            }
-            n++;
-        }
-        fclose (passfile);
-    }*/
-    
     return EXIT_SUCCESS;
 }

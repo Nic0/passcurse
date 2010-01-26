@@ -21,7 +21,7 @@
 int countLine(void)
 {
     int nbrOfLine = 0;
-    char buffer[256];
+    char buffer[256] = {0};
 
     FILE *passfile = NULL;
     passfile = fopen("/home/nicolas/pass.txt", "r");
@@ -30,12 +30,24 @@ int countLine(void)
     {
         while(1)
         {
-            fscanf(passfile, "%s", buffer);
+            if(fscanf(passfile, "%s", buffer) == 0)
+            {
+                printf("error in countLine fonction\n");
+                break;
+            }
             if (feof(passfile)) break;
             nbrOfLine++;
         }
         fclose(passfile);
     }
+    else
+    {   
+        printf("Couldn't open the passfile or doesn't exist\n");
+        /* TODO:
+         * try to create the file
+         */
+    }
+
 return nbrOfLine;
 }
 
@@ -57,12 +69,20 @@ void getNameEntry (struct Entry addrEntry[])
 
         while(1)
         {
-            fscanf(passfile, "%s", buffer);
+            if(fscanf(passfile, "%s", buffer) == 0)
+            {
+                printf("error in getNameEntry\n");
+                break;
+            }
             if(feof(passfile)) break;
 
             if( n % ELEMENT == 0)
             {
-                strncpy(addrEntry[i].name, buffer, 120);
+                if(strncpy(addrEntry[i].name, buffer, 120) == NULL)
+                {
+                    printf("error with struct while parsing %s", buffer);
+                    break;
+                }
                 i++;
             }
             n++;
