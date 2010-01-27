@@ -18,13 +18,13 @@
  *  but has to be change to a proper line
  */
 
-int countLine(void)
+int countLine(char *passfilePath)
 {
     int nbrOfLine = 0;
     char buffer[256] = {0};
 
     FILE *passfile = NULL;
-    passfile = fopen("/home/nicolas/pass.txt", "r");
+    passfile = fopen(passfilePath, "r");
 
     if (passfile != NULL)
     {
@@ -56,11 +56,11 @@ return nbrOfLine;
  *  It just list names
  */
 
-void getNameEntry (struct Entry addrEntry[])
+void getNameEntry (struct Entry addrEntry[], char *passfilePath)
 {
     char buffer[256] = {0};
     FILE *passfile = NULL;
-    passfile = fopen("/home/nicolas/pass.txt", "r");
+    passfile = fopen(passfilePath, "r");
 
     if(passfile != NULL)
     {

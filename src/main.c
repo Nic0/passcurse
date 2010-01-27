@@ -41,7 +41,7 @@ int main (void)
      *  We count lines, and give "lines/ELEMENT" structures
      */
     int nbrOfLine = 0;
-    nbrOfLine = countLine ();
+    nbrOfLine = countLine (passfilePath);
 
 
     /*  Very simple calcul to get the number of entry
@@ -68,7 +68,7 @@ int main (void)
      *  It's put in the entry.name structure
      */
     struct Entry entry[NB_ENTRY];
-    getNameEntry(entry);
+    getNameEntry(entry, passfilePath);
 
     windowBasic(entry, nbrOfEntry);
 

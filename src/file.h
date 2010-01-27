@@ -13,12 +13,12 @@ struct Entry {
 /*  Fonction to count the number of line
  *  in the passfile, return of this number
  */
-int countLine (void);
+int countLine (char *passfilePath);
 
 /*  Get the name from each entry, return it
  *  in the structure
  */
-void getNameEntry(struct Entry addrEntry[]);
+void getNameEntry(struct Entry addrEntry[], char *passfilePath);
 
 
 #endif
