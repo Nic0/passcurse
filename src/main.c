@@ -34,7 +34,7 @@ int main (void)
     {
         return EXIT_FAILURE;
     }
-    printf("%s\n",passfilePath); 
+    
     /*  First, we go throught the file to know how many
      *  structure name/login/pass we've got.
      *  We count lines, and give "lines/ELEMENT" structures
