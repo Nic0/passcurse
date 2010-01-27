@@ -12,6 +12,7 @@
 
 #include "file.h"
 #include "fonction.h"
+#include "ncurses.h"
 
 /*  ELEMENT is the numbre of items in the Entry's structure */
 #define ELEMENT 3
@@ -48,7 +49,10 @@ int main (void)
      */
     int nbrOfEntry;
     nbrOfEntry = (nbrOfLine / ELEMENT) - 1;
-    
+
+    /*  Initialisation of the basic ncurses window
+     */
+    windowInit();
 
     /*  The nbrOfEntry can not be bigger than NB_ENTRY
      *  TODO find something if this happen
@@ -65,6 +69,8 @@ int main (void)
      */
     struct Entry entry[NB_ENTRY];
     getNameEntry(entry);
+
+    windowBasic(entry, nbrOfEntry);
 
     /*  !!  Debug fonction  !!      */
     int n;

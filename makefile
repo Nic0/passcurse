@@ -3,8 +3,8 @@
 #################################
 
 CC=gcc
-CFLAGS=-g -W -Wall -ansi -pedantic
-LDFLAGS=
+CFLAGS=-g -W -Wall -ansi -pedantic -lncurses
+LDFLAGS=-lncurses
 EXEC=passcurse
 SRC= $(wildcard src/*.c)
 OBJ= $(SRC:.c=.o)
