@@ -3,6 +3,6 @@
 
 void windowInit(void);
 void windowBasic(struct Entry *entryName, int nbrOfEntry);
-void getMenuBar(void);
+void getHeaders(void);
 
 #endif

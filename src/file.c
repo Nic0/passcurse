@@ -9,7 +9,7 @@
 
 #include "file.h"
 
-#define ELEMENT 3
+#define ELEMENT 4 
 
 /*  this fonction open the passfile, go througt
  *  just to know how many line is in here, and
@@ -89,4 +89,57 @@ void getNameEntry (struct Entry addrEntry[], char *passfilePath)
         }
         fclose(passfile);
     }
+}
+
+void getStructEntry (struct Entry *addrEntry, char *passfilePath)
+{
+    char buffer [512] = {0};
+    FILE *passfile = NULL;
+    passfile = fopen (passfilePath, "r");
+
+    if(passfile != NULL)
+    {
+        int  tab = 0;
+        int  i   = 0;
+
+        while(1)
+        {
+            char c = 0;
+            fscanf(passfile, "%c", &c);
+            if(feof(passfile))
+            {   break;}
+
+            strncat (buffer, &c, 1);
+
+            if(c == '\n' || c == '\r')
+            {   
+                if(tab == 0)
+                {
+                    strncpy(addrEntry[i].name, buffer, 128);
+                }
+                if(tab == 1)
+                {
+                    strncpy(addrEntry[i].description, buffer, 256);
+                }
+                if(tab == 2)
+                {
+                    strncpy(addrEntry[i].login, buffer, 32);
+                }
+                if(tab == 3)
+                {
+                    strncpy(addrEntry[i].pass, buffer, 32);
+                }
+
+                tab++;
+                if (tab == ELEMENT)
+                {
+                    tab = 0;
+                    i++;
+                }
+                strcpy (buffer, "");
+                
+            }
+        }
+    }
+    fclose(passfile);
 }

@@ -6,6 +6,7 @@
 
 struct Entry {
     char name[128];
+    char description[256];
     char login[32];
     char pass[32];
 };
@@ -19,6 +20,6 @@ int countLine (char *passfilePath);
  *  in the structure
  */
 void getNameEntry(struct Entry addrEntry[], char *passfilePath);
-
+void getScructEntry(struct Entry *addrEntry, char *passfilePath);
 
 #endif

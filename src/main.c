@@ -15,7 +15,7 @@
 #include "ncurses.h"
 
 /*  ELEMENT is the numbre of items in the Entry's structure */
-#define ELEMENT 3
+#define ELEMENT 4
 #define NB_ENTRY 256
 
 int main (void)
@@ -26,15 +26,11 @@ int main (void)
      */
     char homedir[128] = {0};
     if( getHomeDir(homedir) == 1 )
-    {
-        return EXIT_FAILURE;
-    }
+    {   return EXIT_FAILURE;    }
     
     char passfilePath[256] = {0};
     if( getPassfilePath(homedir, passfilePath) == 1)
-    {
-        return EXIT_FAILURE;
-    }
+    {   return EXIT_FAILURE;    }
     
     /*  First, we go throught the file to know how many
      *  structure name/login/pass we've got.
@@ -68,7 +64,8 @@ int main (void)
      *  It's put in the entry.name structure
      */
     struct Entry entry[NB_ENTRY];
-    getNameEntry(entry, passfilePath);
+    /*getNameEntry(entry, passfilePath);*/
+    getStructEntry(entry, passfilePath);
 
     windowBasic(entry, nbrOfEntry);
 

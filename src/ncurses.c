@@ -30,10 +30,10 @@ void windowBasic(struct Entry *entryName, int nbrOfEntry)
     int n;
     int y, x;
 
-    y = 1;
+    y = 2;
     x = 5;
 
-    getMenuBar();
+    getHeaders();
 
     for (n = 0; n <= nbrOfEntry; n++)
     {
@@ -45,9 +45,14 @@ void windowBasic(struct Entry *entryName, int nbrOfEntry)
     getchar();
     endwin();
 }
+/*  This display the headers,
+ *  names: ... description: ...
+ */
 
-void getMenuBar(void)
+void getHeaders(void)
 {
-    move(0,5);
+    move(1,5);
     printw("name:");
+    move(1,15);
+    printw("description:");
 }
