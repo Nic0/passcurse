@@ -111,7 +111,7 @@ void getStructEntry (struct Entry *addrEntry, char *passfilePath)
 
             strncat (buffer, &c, 1);
 
-            if(c == '\n' || c == '\r')
+            if(c == '\n')
             {   
                 if(tab == 0)
                 {

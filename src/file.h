@@ -6,7 +6,7 @@
 
 struct Entry {
     char name[128];
-    char description[256];
+    char description[512];
     char login[32];
     char pass[32];
 };

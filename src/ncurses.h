@@ -4,5 +4,6 @@
 void windowInit(void);
 void windowBasic(struct Entry *entryName, int nbrOfEntry);
 void getHeaders(void);
+void windowHelp(void);
 
 #endif

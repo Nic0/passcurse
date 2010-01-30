@@ -29,21 +29,26 @@ void windowBasic(struct Entry *entryName, int nbrOfEntry)
 
     int n;
     int y, x;
-
-    y = 2;
-    x = 5;
+    x = 5; y = 2;
 
     getHeaders();
 
     for (n = 0; n <= nbrOfEntry; n++)
-    {
+    {   /* TODO make sure the description don't go out of 
+         * the windows, with getmax calcul and %s
+         */
         y++;
         move(y, x);
-        printw("%s", entryName[n].name);
+        char buffer1[32] = {0};
+        char buffer2[521] = {0};
+        
+        strncpy (buffer1, entryName[n].name, 14*sizeof(char));
+        strncpy (buffer2, entryName[n].description, sizeof(char)*(col - 22));
+        printw("%s", buffer1);
+        move(y, x+15);
+        printw("%s", buffer2);
     }
     refresh();
-    getchar();
-    endwin();
 }
 /*  This display the headers,
  *  names: ... description: ...
@@ -53,6 +58,11 @@ void getHeaders(void)
 {
     move(1,5);
     printw("name:");
-    move(1,15);
+    move(1,20);
     printw("description:");
+}
+
+void windowHelp (void)
+{
+
 }

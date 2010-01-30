@@ -66,9 +66,17 @@ int main (void)
     struct Entry entry[NB_ENTRY];
     /*getNameEntry(entry, passfilePath);*/
     getStructEntry(entry, passfilePath);
-
-    windowBasic(entry, nbrOfEntry);
-
+    
+    while(1)
+    {
+        char c;
+        /*windowBasic(entry, nbrOfEntry);*/
+        if(getFonctionMenu (c, entry, nbrOfEntry) == 2)
+        {
+            return EXIT_SUCCESS;
+        }
+        c = getchar();
+    }
     /*  !!  Debug fonction  !!      */
     int n;
     for (n = 0;n <= nbrOfEntry; n++)

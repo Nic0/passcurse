@@ -4,15 +4,14 @@
 *
 **************************************************/
 
-/*  Fonction to get the home variable 
- *  stock in homedir 
- */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ncurses.h>
 
- #include <stdio.h>
- #include <stdlib.h>
- #include <string.h>
-
- #include "fonction.h"
+#include "file.h"
+#include "fonction.h"
+#include "ncurses.h"
 
 /*  We take the environment path with getenv fonction,
  *  into a buffer.
@@ -54,4 +53,34 @@ int getPassfilePath (char *homedir, char *passfilePath)
     }
     printf("Couldn't attributed passfile path\n");
     return 1;
+}
+
+/*  We get the char and determinate what to do with it
+ *  kind of menu, with:
+ *  q == quit
+ *  ? == help
+ */
+
+int getFonctionMenu (char c, struct Entry *entry, int nbrOfEntry)
+{
+    switch (c)
+    {
+        case 'q':
+        {
+            endwin();
+            return 2;
+        }
+        
+        case '?':
+        {
+            windowHelp();
+        }
+
+        default:
+        {
+            windowBasic(entry, nbrOfEntry);
+            break;
+        }
+    }
+return 0;
 }
