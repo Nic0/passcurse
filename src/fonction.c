@@ -74,6 +74,8 @@ int getFonctionMenu (char c, struct Entry *entry, int nbrOfEntry)
         case '?':
         {
             windowHelp();
+            windowBasic(entry, nbrOfEntry);
+            break;
         }
 
         default:
