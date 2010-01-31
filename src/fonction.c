@@ -58,7 +58,7 @@ int getPassfilePath (char *homedir, char *passfilePath)
 /*  We get the char and determinate what to do with it
  *  kind of menu, with:
  *  q == quit
- *  ? == help
+ *  ? == help menu
  */
 
 int getFonctionMenu (char c, struct Entry *entry, int nbrOfEntry)

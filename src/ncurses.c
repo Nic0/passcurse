@@ -9,6 +9,10 @@
 #include "file.h"
 #include "ncurses.h"
 
+/*  This fonction call the basics parameters, to initialize
+ *  the ncurses environment
+ */
+
 void windowInit(void)
 {
     initscr();
@@ -20,6 +24,10 @@ void windowInit(void)
     refresh();
 }
 
+/*  This is the MAIN window, kind of background window, with
+ *  the list of name and description from each passes entry
+ */
+
 void windowBasic(struct Entry *entryName, int nbrOfEntry)
 {
     int row = 0;
@@ -30,9 +38,12 @@ void windowBasic(struct Entry *entryName, int nbrOfEntry)
     int n;
     int y, x;
     x = 5; y = 2;
-
+    /*  call of name:... description:...        */
     getHeaders();
-
+    
+    /*  We take the width of the window, to make sure the descriptions
+     *  dont go out of the window
+     */
     for (n = 0; n <= nbrOfEntry; n++)
     {   /* TODO make sure the description don't go out of 
          * the windows, with getmax calcul and %s
@@ -50,8 +61,10 @@ void windowBasic(struct Entry *entryName, int nbrOfEntry)
     }
     refresh();
 }
-/*  This display the headers,
+
+/*  This display the headers on the basic window
  *  names: ... description: ...
+ *  (and no more)
  */
 
 void getHeaders(void)
@@ -62,6 +75,12 @@ void getHeaders(void)
     printw("description:");
 }
 
+/*  This fonction show a window with a help menu in it
+ *  It call two other fonctions, to create and destroy
+ *  the window, 
+ *  This fonction dosn't realy containt the help menu
+ *  Go to the create_helpwindow fonction to edit the menu
+ */
 void windowHelp (void)
 {   
     int row = 0;
@@ -100,6 +119,9 @@ void windowHelp (void)
     destroy_win(help_window);
 }
 
+/*  The menu help window call with the '?' key
+ */
+
 WINDOW *create_helpwindow(int leight, int widht, int starty, int startx)
 {
     WINDOW *local_win;
@@ -118,6 +140,9 @@ WINDOW *create_helpwindow(int leight, int widht, int starty, int startx)
     wrefresh (local_win);
     return local_win;
 }
+
+/*  This fonction destroy any kind of pop-up windows
+ */
 
 void destroy_win(WINDOW *local_win)
 { 
