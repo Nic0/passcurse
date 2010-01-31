@@ -22,4 +22,6 @@ int countLine (char *passfilePath);
 void getNameEntry(struct Entry addrEntry[], char *passfilePath);
 void getScructEntry(struct Entry *addrEntry, char *passfilePath);
 
+int deleteEntry(int *selected);
+
 #endif

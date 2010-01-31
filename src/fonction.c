@@ -61,28 +61,45 @@ int getPassfilePath (char *homedir, char *passfilePath)
  *  ? == help menu
  */
 
-int getFonctionMenu (char c, struct Entry *entry, int nbrOfEntry)
+int getFonctionMenu (unsigned char c, struct Entry *entry, int nbrOfEntry, int *selected)
 {
     switch (c)
     {
         case 'q':
-        {
             endwin();
             return 2;
-        }
         
         case '?':
-        {
             windowHelp();
-            windowBasic(entry, nbrOfEntry);
+            windowBasic(entry, nbrOfEntry, selected, c);
             break;
-        }
+
+        case ' ':
+            displayDetail(entry[*selected], selected);
+            windowBasic(entry, nbrOfEntry, selected, c);
+            break;
+
+        case 'j':
+            if(*selected < nbrOfEntry)
+                *selected = *selected + 1;
+            windowBasic(entry, nbrOfEntry, selected, c);
+            break;
+
+        case 'k':
+            if(*selected >= 1)
+                *selected = *selected - 1;
+            windowBasic(entry, nbrOfEntry, selected, c);
+            break;
+
+        case 'd':
+            if(confirmationWindow() == 1)
+                deleteEntry(*selected);
+            windowBasic(entry, nbrOfEntry, selected, c);
+            break;
 
         default:
-        {
-            windowBasic(entry, nbrOfEntry);
+            windowBasic(entry, nbrOfEntry, selected, c);
             break;
-        }
     }
 return 0;
 }

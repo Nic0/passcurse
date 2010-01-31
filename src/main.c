@@ -20,7 +20,7 @@
 
 int main (void)
 {
-    
+    int selected = 0;
     /*  We get the home directory and stock it
      *  return it like /home/user/.passcurse/
      */
@@ -69,9 +69,9 @@ int main (void)
     
     while(1)
     {
-        char c;
+        unsigned char c;
         /*windowBasic(entry, nbrOfEntry);*/
-        if(getFonctionMenu (c, entry, nbrOfEntry) == 2)
+        if(getFonctionMenu (c, entry, nbrOfEntry, &selected) == 2)
         {
             return EXIT_SUCCESS;
         }

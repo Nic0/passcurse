@@ -21,7 +21,7 @@
 int countLine(char *passfilePath)
 {
     int nbrOfLine = 0;
-    char buffer[256] = {0};
+    char ch = 0;
 
     FILE *passfile = NULL;
     passfile = fopen(passfilePath, "r");
@@ -30,13 +30,14 @@ int countLine(char *passfilePath)
     {
         while(1)
         {
-            if(fscanf(passfile, "%s", buffer) == 0)
+            if(fscanf(passfile, "%c", &ch) == 0)
             {
                 printf("error in countLine fonction\n");
                 break;
             }
             if (feof(passfile)) break;
-            nbrOfLine++;
+            if(ch == '\n')
+                nbrOfLine++;
         }
         fclose(passfile);
     }
@@ -142,4 +143,9 @@ void getStructEntry (struct Entry *addrEntry, char *passfilePath)
         }
     }
     fclose(passfile);
+}
+
+int deleteEntry (int *selected)
+{
+    return 0;
 }

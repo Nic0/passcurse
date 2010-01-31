@@ -4,6 +4,6 @@
 
 int getHomeDir (char *homedir);
 int getPassfilePath (char *homedir, char *passfilePath);
-int getFonctionMenu (char c, struct Entry *entry, int nbrOfEntry);
+int getFonctionMenu (unsigned char c, struct Entry *entry, int nbrOfEntry, int *selected);
 
 #endif
