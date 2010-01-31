@@ -71,7 +71,7 @@ int main (void)
     {
         unsigned char c;
         /*windowBasic(entry, nbrOfEntry);*/
-        if(getFonctionMenu (c, entry, nbrOfEntry, &selected) == 2)
+        if(getFonctionMenu (c, entry, &nbrOfEntry, &selected, passfilePath) == 2)
         {
             return EXIT_SUCCESS;
         }

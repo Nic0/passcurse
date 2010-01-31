@@ -20,8 +20,8 @@ int countLine (char *passfilePath);
  *  in the structure
  */
 void getNameEntry(struct Entry addrEntry[], char *passfilePath);
-void getScructEntry(struct Entry *addrEntry, char *passfilePath);
+void getStructEntry(struct Entry *addrEntry, char *passfilePath);
 
-int deleteEntry(int *selected);
+int deleteEntry(int *selected, struct Entry *addrEntry, int *nbrOfEntry, char *passfilePath);
 
 #endif

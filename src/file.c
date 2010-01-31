@@ -145,7 +145,63 @@ void getStructEntry (struct Entry *addrEntry, char *passfilePath)
     fclose(passfile);
 }
 
-int deleteEntry (int *selected)
+int deleteEntry (int *selected, struct Entry *addrEntry, int *nbrOfEntry, char *passfilePath)
 {
+
+    /*  For delete, first we write in a tmp file the entries
+     *  without the one deleted.
+     */
+
+    char passfileTmp[256] = {0};
+    strcpy (passfileTmp, passfilePath);
+    strcat (passfileTmp, ".tmp");
+
+    FILE *tmppassfile;
+    tmppassfile = fopen(passfileTmp, "w");
+
+    if(tmppassfile != NULL)
+    {
+        int n;
+        for (n = 0; n <= *nbrOfEntry; n++)
+        {   
+            if(n == *selected)
+                n++;
+            fprintf(tmppassfile, "%s", addrEntry[n].name);
+            fprintf(tmppassfile, "%s", addrEntry[n].description);
+            fprintf(tmppassfile, "%s", addrEntry[n].login);
+            fprintf(tmppassfile, "%s", addrEntry[n].pass);
+        }
+        fclose(tmppassfile);
+    }
+    else
+    {   return 1;}
+    
+    FILE *passfile;
+    passfile = fopen(passfilePath, "w");
+
+    if(passfile != NULL)
+    {
+        int n;
+        for (n = 0; n <= *nbrOfEntry; n++)
+        {   
+            if(n == *selected)
+                n++;
+            fprintf(passfile, "%s", addrEntry[n].name);
+            fprintf(passfile, "%s", addrEntry[n].description);
+            fprintf(passfile, "%s", addrEntry[n].login);
+            fprintf(passfile, "%s", addrEntry[n].pass);
+        }
+        fclose(passfile);
+    }
+    else
+    {   return 1;}
+    
+    /*  TODO check md5sum of both file, and if match
+     *  we delete the tmp file, and change the structure
+     */
+
+    *nbrOfEntry = *nbrOfEntry - 1;
+    getStructEntry(addrEntry, passfilePath);
+
     return 0;
 }

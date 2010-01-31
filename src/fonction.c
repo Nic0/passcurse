@@ -59,9 +59,14 @@ int getPassfilePath (char *homedir, char *passfilePath)
  *  kind of menu, with:
  *  q == quit
  *  ? == help menu
+ *  
+ *  j == go down
+ *  k == go up
+ *
+ *  space == display informations
  */
 
-int getFonctionMenu (unsigned char c, struct Entry *entry, int nbrOfEntry, int *selected)
+int getFonctionMenu (unsigned char c, struct Entry *entry, int *nbrOfEntry, int *selected, char *passfilePath)
 {
     switch (c)
     {
@@ -71,34 +76,34 @@ int getFonctionMenu (unsigned char c, struct Entry *entry, int nbrOfEntry, int *
         
         case '?':
             windowHelp();
-            windowBasic(entry, nbrOfEntry, selected, c);
+            windowBasic(entry, *nbrOfEntry, selected, c);
             break;
 
         case ' ':
             displayDetail(entry[*selected], selected);
-            windowBasic(entry, nbrOfEntry, selected, c);
+            windowBasic(entry, *nbrOfEntry, selected, c);
             break;
 
         case 'j':
-            if(*selected < nbrOfEntry)
+            if(*selected < *nbrOfEntry)
                 *selected = *selected + 1;
-            windowBasic(entry, nbrOfEntry, selected, c);
+            windowBasic(entry, *nbrOfEntry, selected, c);
             break;
 
         case 'k':
             if(*selected >= 1)
                 *selected = *selected - 1;
-            windowBasic(entry, nbrOfEntry, selected, c);
+            windowBasic(entry, *nbrOfEntry, selected, c);
             break;
 
         case 'd':
             if(confirmationWindow() == 1)
-                deleteEntry(*selected);
-            windowBasic(entry, nbrOfEntry, selected, c);
+                deleteEntry(selected, entry, nbrOfEntry, passfilePath);
+            windowBasic(entry, *nbrOfEntry, selected, c);
             break;
 
         default:
-            windowBasic(entry, nbrOfEntry, selected, c);
+            windowBasic(entry, *nbrOfEntry, selected, c);
             break;
     }
 return 0;
