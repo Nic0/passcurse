@@ -156,12 +156,18 @@ WINDOW *create_helpwindow(int leight, int widht, int starty, int startx)
     
     mvwprintw (local_win, 2, 5,  "q");
     mvwprintw (local_win, 2, 20, "Quit");
-    mvwprintw (local_win, 3, 5, "?");
-    mvwprintw (local_win, 3, 20, "Display this help menu");
-    mvwprintw (local_win, 5, 5, "a");
-    mvwprintw (local_win, 5, 20, "Add a new entry");
-    mvwprintw (local_win, 6, 5, "d");
-    mvwprintw (local_win, 6, 20, "Delete an entry");
+    mvwprintw (local_win, 4, 5, "j");
+    mvwprintw (local_win, 4, 20, "Move down to the list");
+    mvwprintw (local_win, 5, 5, "k");
+    mvwprintw (local_win, 5, 20, "Move up to the list");
+    mvwprintw (local_win, 6, 5, "space");
+    mvwprintw (local_win, 6, 20, "Display full information and pass for an entry");
+    mvwprintw (local_win, 8, 5, "a");
+    mvwprintw (local_win, 8, 20, "Add a new entry");
+    mvwprintw (local_win, 9, 5, "d");
+    mvwprintw (local_win, 9, 20, "Delete an entry");
+    mvwprintw (local_win, 11, 5, "?");
+    mvwprintw (local_win, 11, 20, "Display this help menu");
 
     wrefresh (local_win);
     return local_win;
@@ -176,7 +182,7 @@ void destroy_win(WINDOW *local_win)
     wprintw (local_win, "                                         ");
     
     int n;
-    for(n = 2; n <= 10; n++)
+    for(n = 2; n <= 15; n++)
     {
         mvwprintw (local_win, n, 1,"                                               ");
     }
