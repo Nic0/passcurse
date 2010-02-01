@@ -6,8 +6,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ncurses.h>
+
 
 #include "file.h"
+#include "ncurses.h"
 
 #define ELEMENT 4 
 
@@ -205,3 +208,55 @@ int deleteEntry (int *selected, struct Entry *addrEntry, int *nbrOfEntry, char *
 
     return 0;
 }
+
+int addEntry (int *selected, struct Entry *entry, int *nbrOfEntry, char *passfilePath)
+{
+    WINDOW *addWindow;
+    addWindow = create_addwindow (entry, nbrOfEntry);
+    getchar();
+    destroy_win(addWindow);
+
+
+    char passfileTmp[256] = {0};
+    strcpy (passfileTmp, passfilePath);
+    strcat (passfileTmp, ".tmp");
+
+    FILE *tmppassfile;
+    tmppassfile = fopen(passfileTmp, "w");
+
+    if(tmppassfile != NULL)
+    {
+        int n;
+        for (n = 0; n <= *nbrOfEntry +1; n++)
+        {   
+            fprintf(tmppassfile, "%s", entry[n].name);
+            fprintf(tmppassfile, "%s", entry[n].description);
+            fprintf(tmppassfile, "%s", entry[n].login);
+            fprintf(tmppassfile, "%s", entry[n].pass);
+        }
+        fclose(tmppassfile);
+    }
+    else
+    {   return 1;}
+    
+    FILE *passfile;
+    passfile = fopen(passfilePath, "w");
+
+    if(passfile != NULL)
+    {
+        int n;
+        for (n = 0; n <= *nbrOfEntry +1; n++)
+        {   
+            fprintf(passfile, "%s", entry[n].name);
+            fprintf(passfile, "%s", entry[n].description);
+            fprintf(passfile, "%s", entry[n].login);
+            fprintf(passfile, "%s", entry[n].pass);
+        }
+        fclose(passfile);
+    }
+    else
+    {   return 1;}
+
+return 0;
+}
+

@@ -102,6 +102,11 @@ int getFonctionMenu (unsigned char c, struct Entry *entry, int *nbrOfEntry, int 
             windowBasic(entry, *nbrOfEntry, selected, c);
             break;
 
+        case 'a':
+            addEntry(selected, entry, nbrOfEntry, passfilePath);
+            windowBasic(entry, *nbrOfEntry, selected, c);
+            break;
+
         default:
             windowBasic(entry, *nbrOfEntry, selected, c);
             break;

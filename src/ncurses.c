@@ -263,3 +263,46 @@ int confirmationWindow(void)
     return 0;
 }
 
+
+WINDOW *create_addwindow (struct Entry *entry, int *nbrOfEntry)
+{
+    WINDOW *local_win;
+    char buffer[512] = {0};
+
+    /*TODO dynamique size of the window */
+
+    local_win = newwin (15, 70, 2, 5);
+    box (local_win, 0, 0);
+    
+    echo();
+    curs_set(1);
+
+    mvwprintw (local_win, 2, 5, "name:");
+    mvwscanw (local_win, 2, 20, "%s",  buffer);
+    strncpy (entry[*nbrOfEntry+1].name, buffer, 186);
+    strcat (entry[*nbrOfEntry+1].name, "\n");
+
+    mvwprintw (local_win, 3, 5, "description:");
+    mvwscanw (local_win, 3, 20, "%s", buffer);
+    strncpy (entry[*nbrOfEntry+1].description, buffer, 256);
+    strcat (entry[*nbrOfEntry+1].description, "\n");
+
+    mvwprintw (local_win, 5, 5, "login:");
+    mvwscanw (local_win, 5, 20, "%s", buffer);
+    strncpy (entry[*nbrOfEntry+1].login, buffer, 32);
+    strcat (entry[*nbrOfEntry+1].login, "\n");
+
+    mvwprintw (local_win, 6, 5, "pass:");
+    mvwscanw (local_win, 6, 20, "%s", buffer);
+    strncpy (entry[*nbrOfEntry+1].pass, buffer, 32);
+    strcat (entry[*nbrOfEntry+1].pass, "\n");
+
+    noecho();
+    curs_set(0);
+
+    *nbrOfEntry = *nbrOfEntry +1;
+    
+    wrefresh (local_win);
+    return (local_win);
+
+}
