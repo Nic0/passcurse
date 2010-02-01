@@ -64,6 +64,20 @@ int main (void)
      *  It's put in the entry.name structure
      */
     struct Entry entry[NB_ENTRY];
+    /*int i;
+
+    for (i = 0; i <= NB_ENTRY; i++)
+    {
+        entry[i].name = {0};
+        entry[i].description = {0};
+        entry[i].login = {0};
+        entry[i].pass = {0};
+    }*/
+    
+
+
+
+
     /*getNameEntry(entry, passfilePath);*/
     getStructEntry(entry, passfilePath);
     

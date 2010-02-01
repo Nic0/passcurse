@@ -35,11 +35,11 @@ void windowBasic(struct Entry *entryName, int nbrOfEntry, int *selected, char c)
 
     getmaxyx(stdscr, row, col);
 
-    int n;
+    int m;
     int startn;
     int endn;
     int y, x;
-    x = 5; y = 2; startn = 0; endn = 0;
+    x = 5; y = 2; startn = 0; endn = 0; m = 0;
 
     getHelpBar(row);
     /*  call of name:... description:...        */
@@ -53,14 +53,16 @@ void windowBasic(struct Entry *entryName, int nbrOfEntry, int *selected, char c)
     {
         endn = (row - 6);
     }
+    else 
+        endn = nbrOfEntry;
 
-    if(*selected > endn)
+    if(*selected > (row - 6))
     {
         startn = *selected - (row - 5) + 1;
         endn = *selected;
     }
 
-    for (n = startn; n <= endn; n++)
+    for (m = startn; m <= endn; m++)
     {
         y++;
         move(y, x);
@@ -71,18 +73,18 @@ void windowBasic(struct Entry *entryName, int nbrOfEntry, int *selected, char c)
      *  dont go out of the window
      */
         
-        strncpy (buffer1, entryName[n].name, 14*sizeof(char));
-        strncpy (buffer2, entryName[n].description, sizeof(char)*(col - 22));
-        if(n == *selected)
+        strncpy (buffer1, entryName[m].name, 14*sizeof(char));
+        strncpy (buffer2, entryName[m].description, sizeof(char)*(col - 22));
+        if(m == *selected)
             attron(A_BOLD);
         printw("%s", buffer1);
-        if(n == *selected)
+        if(m == *selected)
             attroff(A_BOLD);
         move(y, x+15);
-        if(n == *selected)
+        if(m == *selected)
             attron(A_BOLD);
         printw("%s", buffer2);
-        if(n == *selected)
+        if(m == *selected)
             attroff(A_BOLD);
     }
     refresh();
