@@ -87,6 +87,9 @@ void windowBasic(struct Entry *entryName, int nbrOfEntry, int *selected, char c)
         if(m == *selected)
             attroff(A_BOLD);
     }
+    if (nbrOfEntry <= row)
+        mvprintw(nbrOfEntry+4, 0,"                                                              ");
+    
     refresh();
 }
 
@@ -184,9 +187,9 @@ void destroy_win(WINDOW *local_win)
     wprintw (local_win, "                                         ");
     
     int n;
-    for(n = 2; n <= 15; n++)
+    for(n = 0; n <= 30; n++)
     {
-        mvwprintw (local_win, n, 1,"                                               ");
+        mvwprintw (local_win, n, 1,"                                                                                                            ");
     }
 
     wrefresh (local_win);
@@ -278,22 +281,22 @@ WINDOW *create_addwindow (struct Entry *entry, int *nbrOfEntry)
     curs_set(1);
 
     mvwprintw (local_win, 2, 5, "name:");
-    mvwscanw (local_win, 2, 20, "%s",  buffer);
-    strncpy (entry[*nbrOfEntry+1].name, buffer, 186);
+    mvwprintw (local_win, 3, 5, "description:");
+    mvwprintw (local_win, 5, 5, "login:");
+    mvwprintw (local_win, 6, 5, "pass:");
+    mvwgetnstr (local_win, 2, 20,   buffer, 128);
+    strncpy (entry[*nbrOfEntry+1].name, buffer, 128);
     strcat (entry[*nbrOfEntry+1].name, "\n");
 
-    mvwprintw (local_win, 3, 5, "description:");
-    mvwscanw (local_win, 3, 20, "%s", buffer);
+    mvwgetnstr (local_win, 3, 20, buffer, 256);
     strncpy (entry[*nbrOfEntry+1].description, buffer, 256);
     strcat (entry[*nbrOfEntry+1].description, "\n");
 
-    mvwprintw (local_win, 5, 5, "login:");
-    mvwscanw (local_win, 5, 20, "%s", buffer);
+    mvwgetnstr (local_win, 5, 20,  buffer, 32);
     strncpy (entry[*nbrOfEntry+1].login, buffer, 32);
     strcat (entry[*nbrOfEntry+1].login, "\n");
 
-    mvwprintw (local_win, 6, 5, "pass:");
-    mvwscanw (local_win, 6, 20, "%s", buffer);
+    mvwgetnstr (local_win, 6, 20, buffer, 32);
     strncpy (entry[*nbrOfEntry+1].pass, buffer, 32);
     strcat (entry[*nbrOfEntry+1].pass, "\n");
 
@@ -306,3 +309,4 @@ WINDOW *create_addwindow (struct Entry *entry, int *nbrOfEntry)
     return (local_win);
 
 }
+

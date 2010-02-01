@@ -99,6 +99,16 @@ int getFonctionMenu (unsigned char c, struct Entry *entry, int *nbrOfEntry, int 
         case 'd':
             if(confirmationWindow() == 1)
                 deleteEntry(selected, entry, nbrOfEntry, passfilePath);
+            int row; row = 0;
+            int col; col = 0;
+            getmaxyx(stdscr, row, col);
+            
+            if(*nbrOfEntry <= (row -5))
+            {
+                /* if the one deleted is the last one   */
+                if(*selected >= *nbrOfEntry)
+                    *selected = *nbrOfEntry;
+            }
             windowBasic(entry, *nbrOfEntry, selected, c);
             break;
 
